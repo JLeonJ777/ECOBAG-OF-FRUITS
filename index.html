@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECOBAG OF FRUITS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background: #fcfcfc; }
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1400");
+  background-attachment: fixed; background-size: cover; background-position: center;
+  height: 100vh; color: white; display: flex; align-items: center; text-align: center;
+}
+.section { padding: 90px 0; }
+.bg-soft { background: linear-gradient(135deg, #e9f7ef, #d4edda); color: #212529; }
+.bg-gradient { background: linear-gradient(135deg, #198754, #20c997); color: white; }
+.bg-light-eco { background: linear-gradient(135deg, #ffffff, #e8f8f5); color: #212529; }
+.card { border: none; border-radius: 20px; background: rgba(255,255,255,0.7); box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+.card:hover { transform: translateY(-15px) scale(1.05); }
+.proceso-card { position: relative; overflow: hidden; }
+.proceso-card img { width: 100%; height: 220px; object-fit: cover; transition: 0.4s; }
+.overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.7); color: white; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: 0.4s; text-align: center; padding: 15px; }
+.proceso-card:hover img { transform: scale(1.1); }
+.proceso-card:hover .overlay { opacity: 1; }
+.testimonial { background: rgba(255,255,255,0.85); padding: 20px; border-radius: 20px; transition: 0.4s; color: #333; }
+.testimonial:hover { transform: scale(1.05); }
+/* IMPACTO */
+.impacto-card { background: rgba(9, 131, 179, 0.15); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 30px 20px; transition: 0.4s; }
+.impacto-card:hover { background: rgba(0, 0, 0, 0.25); transform: translateY(-8px); }
+.impacto-icon { font-size: 42px; margin-bottom: 10px; display: block; }
+.counter { font-size: 52px; font-weight: 700; color: #070707; line-height: 1; }
+.counter-suffix { font-size: 28px; font-weight: 700; color: #0c0c0c; }
+.impacto-label { font-size: 15px; color: rgba(12, 12, 12, 0.85); margin-top: 6px; }
+.impacto-desc { font-size: 12px; color: rgba(0, 0, 0, 0.6); margin-top: 4px; }
+.progress-bar-eco { background: rgba(0, 0, 0, 0.2); border-radius: 50px; height: 6px; margin-top: 14px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 50px; background: rgba(4, 158, 30, 0.8); width: 0%; transition: width 1.5s ease; }
+/* CONTACTO */
+.contact-section { background: linear-gradient(135deg, #0f5132, #198754, #20c997); padding: 90px 0; }
+.contact-info-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 24px; padding: 40px 30px; color: white; height: 100%; }
+.contact-info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.contact-info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.contact-icon-wrap { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.contact-info-text strong { display: block; font-size: 14px; opacity: 0.7; font-weight: 400; margin-bottom: 2px; }
+.contact-info-text span { font-size: 15px; font-weight: 600; }
+.contact-social { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+.social-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 18px; border-radius: 50px; font-size: 13px; text-decoration: none; transition: 0.3s; }
+.social-btn:hover { background: rgba(255,255,255,0.35); color: white; }
+.form-box { background: #fff; border-radius: 24px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.form-box h3 { color: #198754; font-weight: 700; margin-bottom: 4px; }
+.form-box .form-label { font-size: 13px; font-weight: 600; color: #444; margin-bottom: 4px; }
+.form-box .form-control, .form-box .form-select { border-radius: 12px; border: 1.5px solid #e0e0e0; font-size: 14px; padding: 10px 14px; transition: 0.3s; background: #fafafa; color: #222; }
+.form-box .form-control:focus, .form-box .form-select:focus { border-color: #20c997; box-shadow: 0 0 0 3px rgba(32,201,151,0.15); background: #fff; }
+.form-box .form-control::placeholder { color: #aaa; }
+.btn-enviar { background: linear-gradient(135deg, #198754, #20c997); border: none; color: white; padding: 13px; border-radius: 12px; font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; transition: 0.3s; }
+.btn-enviar:hover { opacity: 0.9; transform: translateY(-1px); }
+.input-wrap { position: relative; }
+.input-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; pointer-events: none; }
+.whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px; border-radius: 50%; font-size: 24px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.whatsapp:hover { background: #1da851; color: white; }
+.fade { opacity: 0; transform: translateY(40px); transition: 1s; }
+.fade.show { opacity: 1; transform: translateY(0); }
+footer { background: linear-gradient(45deg, #198754, #20c997); color: rgb(253,252,252); padding: 40px; text-align: center; }
+.form-alert { display: none; margin-top: 12px; border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container fade show">
+    <h1 class="display-3">ECOBAG OF FRUITS 🌍</h1>
+    <p class="lead">Hechas a partir de residuos orgánicos</p>
+    <a href="#impacto" class="btn btn-outline-light mt-3">Conoce más ↓</a>
+  </div>
+</section>
+
+<!-- IMPACTO MEJORADO -->
+<section id="impacto" class="section bg-gradient text-center fade">
+  <div class="container">
+    <h2 class="mb-2" style="color:rgb(0, 0, 0);">Nuestro Impacto</h2>
+    <p style="color:rgba(0, 0, 0, 0.75); margin-bottom:50px;">Cada bolsa que usas transforma el planeta</p>
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4 col-sm-6">
+        <div class="impacto-card">
+          <span class="impacto-icon">♻️</span>
+          <div><span class="counter" data-target="80">0</span><span class="counter-suffix">%</span></div>
+          <p class="impacto-label">Reducción de plástico</p>
+          <p class="impacto-desc">vs. bolsas plásticas convencionales</p>
+          <div class="progress-bar-eco"><div class="progress-fill" data-width="80"></div></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="impacto-card">
+          <span class="impacto-icon">🌱</span>
+          <div><span class="counter" data-target="6">0</span><span class="counter-suffix"> meses</span></div>
+          <p class="impacto-label">Tiempo de degradación</p>
+          <p class="impacto-desc">vs. 400 años del plástico común</p>
+          <div class="progress-bar-eco"><div class="progress-fill" data-width="95"></div></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="impacto-card">
+          <span class="impacto-icon">🌿</span>
+          <div><span class="counter" data-target="100">0</span><span class="counter-suffix">%</span></div>
+          <p class="impacto-label">Ingredientes naturales</p>
+          <p class="impacto-desc">Sin químicos tóxicos</p>
+          <div class="progress-bar-eco"><div class="progress-fill" data-width="100"></div></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="impacto-card">
+          <span class="impacto-icon">🛍️</span>
+          <div><span class="counter" data-target="50">0</span><span class="counter-suffix">+</span></div>
+          <p class="impacto-label">Usos por bolsa</p>
+          <p class="impacto-desc">Resistente y reutilizable</p>
+          <div class="progress-bar-eco"><div class="progress-fill" data-width="60"></div></div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6">
+        <div class="impacto-card">
+          <span class="impacto-icon">💧</span>
+          <div><span class="counter" data-target="70">0</span><span class="counter-suffix">%</span></div>
+          <p class="impacto-label">Menos huella hídrica</p>
+          <p class="impacto-desc">en su proceso de fabricación</p>
+          <div class="progress-bar-eco"><div class="progress-fill" data-width="70"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="section bg-soft text-center fade">
+  <div class="container">
+    <h2>Beneficios</h2>
+    <div class="row mt-4">
+      <div class="col-md-3"><div class="card p-3">♻️ Ecológicas</div></div>
+      <div class="col-md-3"><div class="card p-3">🌱 Naturales</div></div>
+      <div class="col-md-3"><div class="card p-3">💧 Degradables</div></div>
+      <div class="col-md-3"><div class="card p-3">🛍️ Reutilizables</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="section bg-light-eco fade">
+  <div class="container">
+    <h2 class="text-center mb-5">Proceso</h2>
+    <div class="row g-4">
+      <div class="col-md-3"><div class="card proceso-card"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" alt="Material"><div class="overlay"><h5>1. Material</h5><p>Residuos orgánicos como papa, maíz o plátano.</p></div></div></div>
+      <div class="col-md-3"><div class="card proceso-card"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=400" alt="Extracción"><div class="overlay"><h5>2. Extracción</h5><p>Obtención del almidón mediante filtrado.</p></div></div></div>
+      <div class="col-md-3"><div class="card proceso-card"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400" alt="Mezcla"><div class="overlay"><h5>3. Mezcla</h5><p>Se combina con glicerina y ácido acético.</p></div></div></div>
+      <div class="col-md-3"><div class="card proceso-card"><img src="4.jfif" alt="Moldeado"><div class="overlay"><h5>4. Moldeado</h5><p>Se forman láminas biodegradables.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="section bg-soft text-center fade">
+  <div class="container">
+    <h2>Video</h2>
+    <div class="ratio ratio-16x9 mt-4">
+      <iframe src="https://www.youtube.com/embed/5hfrk6CpYn8" allowfullscreen title="Video ECOBAG OF FRUITS"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="section bg-light-eco text-center fade">
+  <div class="container">
+    <h2>Testimonios</h2>
+    <div class="row mt-4">
+      <div class="col-md-4 mb-3"><div class="testimonial">⭐⭐⭐⭐⭐<br>"Excelente producto, muy resistente." 🌱</div></div>
+      <div class="col-md-4 mb-3"><div class="testimonial">⭐⭐⭐⭐⭐<br>"Muy resistente, superó mis expectativas." 💪</div></div>
+      <div class="col-md-4 mb-3"><div class="testimonial">⭐⭐⭐⭐⭐<br>"Me encanta que cuida el planeta." 🌍</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO MEJORADO -->
+<section class="contact-section fade">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 style="color:white; font-size:36px; font-weight:700;">¿Hablamos? 💬</h2>
+      <p style="color:rgba(255,255,255,0.75); font-size:16px;">Estamos aquí para responder todas tus preguntas</p>
+    </div>
+    <div class="row g-4 align-items-stretch">
+
+      <!-- INFO -->
+      <div class="col-lg-5">
+        <div class="contact-info-card">
+          <h4 style="margin-bottom:30px; font-weight:700;">Información de contacto</h4>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap">📧</div>
+            <div class="contact-info-text"><strong>Correo electrónico</strong><span>ecobagfruits@gmail.com</span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap">📞</div>
+            <div class="contact-info-text"><strong>Teléfono / WhatsApp</strong><span>+57 300 123 4567</span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap">📍</div>
+            <div class="contact-info-text"><strong>Ubicación</strong><span>Colombia 🇨🇴</span></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon-wrap">🕐</div>
+            <div class="contact-info-text"><strong>Horario de atención</strong><span>Lun – Vie: 8am a 6pm</span></div>
+          </div>
+          <div class="contact-social">
+            <a href="https://wa.me/573001234567" target="_blank" class="social-btn">💬 WhatsApp</a>
+            <a href="mailto:ecobagfruits@gmail.com" class="social-btn">✉️ Email</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <div class="col-lg-7">
+        <div class="form-box">
+          <h3>Envíanos un mensaje</h3>
+          <p style="color:#666; font-size:13px; margin-bottom:24px;">Te respondemos en menos de 24 horas</p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label">Nombre *</label>
+              <div class="input-wrap">
+                <input id="nombre" class="form-control" placeholder="Tu nombre completo">
+                <span class="input-icon">👤</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">Correo electrónico *</label>
+              <div class="input-wrap">
+                <input id="correo" class="form-control" type="email" placeholder="tucorreo@ejemplo.com">
+                <span class="input-icon">✉️</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">Teléfono (opcional)</label>
+              <div class="input-wrap">
+                <input id="telefono" class="form-control" type="tel" placeholder="+57 300 000 0000">
+                <span class="input-icon">📱</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">Motivo de contacto *</label>
+              <select id="motivo" class="form-select">
+                <option value="">Selecciona una opción...</option>
+                <option value="compra">Quiero comprar / cotizar</option>
+                <option value="info">Información del producto</option>
+                <option value="alianza">Alianza o distribución</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Mensaje *</label>
+              <textarea id="mensaje" class="form-control" rows="4" placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn-enviar" onclick="enviarFormulario()">Enviar mensaje 🌱</button>
+              <div id="form-alert" class="alert form-alert" role="alert"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h5>ECOBAG OF FRUITS</h5>
+  <p>📧 ecobagfruits@gmail.com</p>
+  <p>📞 +57 300 123 4567</p>
+  <p style="font-size:12px; opacity:0.7; margin-top:10px;">© 2025 ECOBAG OF FRUITS. Todos los derechos reservados.</p>
+</footer>
+
+<a href="https://wa.me/573001234567" target="_blank" class="whatsapp" title="Escríbenos por WhatsApp">💬</a>
+
+<script>
+const fades = document.querySelectorAll('.fade');
+let contadoresActivados = false;
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      if (entry.target.querySelector && entry.target.querySelector('.counter') && !contadoresActivados) {
+        contadoresActivados = true;
+        animarContadores();
+        animarBarras();
+      }
+    }
+  });
+}, { threshold: 0.15 });
+fades.forEach(el => observer.observe(el));
+
+function animarContadores() {
+  document.querySelectorAll('.counter').forEach(counter => {
+    let count = 0;
+    const target = +counter.getAttribute('data-target');
+    const speed = Math.max(0.5, target / 80);
+    const update = () => {
+      count += speed;
+      if (count < target) { counter.innerText = Math.ceil(count); setTimeout(update, 20); }
+      else { counter.innerText = target; }
+    };
+    update();
+  });
+}
+
+function animarBarras() {
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 300);
+  });
+}
+
+function enviarFormulario() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const motivo = document.getElementById('motivo').value;
+  const mensaje = document.getElementById('mensaje').value.trim();
+  const alerta = document.getElementById('form-alert');
+  alerta.style.display = 'block';
+  if (!nombre || !correo || !motivo || !mensaje) {
+    alerta.className = 'alert alert-warning form-alert';
+    alerta.innerText = '⚠️ Por favor completa todos los campos obligatorios.';
+    return;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(correo)) {
+    alerta.className = 'alert alert-warning form-alert';
+    alerta.innerText = '⚠️ Por favor ingresa un correo electrónico válido.';
+    return;
+  }
+  alerta.className = 'alert alert-success form-alert';
+  alerta.innerText = '✅ ¡Mensaje enviado con éxito! Te contactaremos pronto. 🌱';
+  document.getElementById('nombre').value = '';
+  document.getElementById('correo').value = '';
+  document.getElementById('telefono').value = '';
+  document.getElementById('motivo').value = '';
+  document.getElementById('mensaje').value = '';
+}
+</script>
+</body>
+</html>
